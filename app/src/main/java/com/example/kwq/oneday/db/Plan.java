@@ -1,33 +1,43 @@
 package com.example.kwq.oneday.db;
 
 public class Plan {
-    private String sTime;
-    private String eTime;
+    private String date;
+    private String startTime;
+    private String endTime;
     private String planType;
     private String plan;
 
-    public Plan(String sTime, String eTime, String planType, String plan) {
-        this.sTime = sTime;
-        this.eTime = eTime;
+    public Plan(String date, String startTime, String endTime, String planType, String plan) {
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.planType = planType;
         this.plan = plan;
     }
 
 
-    public String getSTime() {
-        return sTime;
+    public String getDate() {
+        return date;
     }
 
-    public void setSTime(String sTime) {
-        this.sTime = sTime;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getETime() {
-        return eTime;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setETime(String eTime) {
-        this.eTime = eTime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getPlanType() {

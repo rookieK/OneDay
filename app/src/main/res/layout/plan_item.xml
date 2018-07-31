@@ -25,22 +25,22 @@
                 android:background="#E8E8E8">
 
                 <TextView
-                    android:id="@+id/sTime"
+                    android:id="@+id/startTime"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_horizontal"
-                    android:paddingTop="13dp"
-                    android:text="18:00"
-                    android:textSize="20dp"/>
+                    android:paddingTop="12dp"
+                    android:textSize="23dp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/eTime"
+                    android:id="@+id/endTime"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_horizontal"
-                    android:paddingTop="3dp"
-                    android:text="18:30"
-                    android:textSize="20dp"/>
+                    android:paddingTop="1dp"
+                    android:textSize="23dp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -57,7 +57,8 @@
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:textSize="27dp"/>
+                    android:textSize="27dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/plan"
@@ -67,7 +68,7 @@
                     android:gravity="center_vertical"
                     android:maxLines="2"
                     android:ellipsize="end"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp" />
 
             </LinearLayout>
 

@@ -15,15 +15,15 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     private List<Plan> mPlanList;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView sTime;
-        TextView eTime;
+        TextView startTime;
+        TextView endTime;
         TextView planType;
         TextView plan;
 
         public ViewHolder(View view) {
             super(view);
-            sTime = (TextView) view.findViewById(R.id.sTime);
-            eTime = (TextView) view.findViewById(R.id.eTime);
+            startTime = (TextView) view.findViewById(R.id.startTime);
+            endTime = (TextView) view.findViewById(R.id.endTime);
             planType = (TextView) view.findViewById(R.id.planType);
             plan = (TextView) view.findViewById(R.id.plan);
         }
@@ -43,8 +43,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Plan plan = mPlanList.get(position);
-        holder.sTime.setText(plan.getSTime());
-        holder.eTime.setText(plan.getETime());
+        holder.startTime.setText(plan.getStartTime());
+        holder.endTime.setText(plan.getEndTime());
         holder.planType.setText(plan.getPlanType());
         holder.plan.setText(plan.getPlan());
     }
