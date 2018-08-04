@@ -1,11 +1,17 @@
 package com.example.kwq.oneday.db;
 
-public class Plan {
+import org.litepal.crud.DataSupport;
+
+public class Plan extends DataSupport {
+    private int id;
+    private int rank;
     private String date;
     private String startTime;
     private String endTime;
     private String planType;
     private String plan;
+
+    public Plan() {}
 
     public Plan(String date, String startTime, String endTime, String planType, String plan) {
         this.date = date;
@@ -15,6 +21,23 @@ public class Plan {
         this.plan = plan;
     }
 
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
 
     public String getDate() {
         return date;

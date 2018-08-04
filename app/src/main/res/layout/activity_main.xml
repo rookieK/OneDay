@@ -103,6 +103,4 @@
         android:src="@mipmap/add_png"
         android:layout_gravity="right|bottom" />
 
-
-
 </android.support.design.widget.CoordinatorLayout>

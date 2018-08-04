@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SetPlan">
+    android:orientation="vertical"
+    tools:context=".SelectDateActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/sp_toolbar"
+        android:id="@+id/sd_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -16,28 +17,24 @@
         app:popupTheme="@style/Theme.AppCompat.Light" />
 
     <CalendarView
-        android:id="@+id/sp_calendarView"
+        android:id="@+id/sd_calendarView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/sp_toolbar" />
+        android:layout_height="wrap_content" />
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/sp_calendarView">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <Button
-            android:id="@+id/sp_Button"
+            android:id="@+id/sd_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
+            android:layout_gravity="center_horizontal|center_vertical"
             android:textColor="#FFFFFF"
-            android:layout_gravity="center"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="60dp"
-            android:padding="8dp"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary"
+            android:padding="8dp" />
 
     </FrameLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

@@ -103,12 +103,12 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
         }
 
-        //Intent etplan活动
+        //Intent SelectDate活动
         FloatingActionButton setPlan = findViewById(R.id.setPlan);
         setPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SetPlan.class);
+                Intent intent = new Intent(MainActivity.this, SelectDateActivity.class);
                 startActivity(intent);
             }
         });
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         String planType = "工作";
         String plan = "酒店客房就开始的房价快速反击肯定是九分";
         for (int i = 0; i < 10; i++){
-            Plan p = new Plan("a", sTime, eTime, planType, plan);
+            Plan p = new Plan("0", sTime, eTime, planType, plan);
             planList.add(p);
         }
     }

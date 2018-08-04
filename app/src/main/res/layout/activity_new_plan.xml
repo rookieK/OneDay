@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewPlanActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="7dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="标题："
+                android:textSize="25dp"/>
+
+            <EditText
+                android:id="@+id/np_planType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/np_time"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:text="S ? E ?"
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:text="内容："
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/np_plan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:hint="请输入计划内容"
+            android:textSize="24dp"
+            android:background="@null" />
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/np_setStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        app:elevation="8dp"
+        android:layout_margin="16dp"
+        android:src="@mipmap/add_png"
+        android:layout_gravity="left|bottom" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/np_setEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        app:elevation="8dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="center|bottom" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/np_newPlan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        app:elevation="8dp"
+        android:layout_margin="16dp"
+        android:src="@mipmap/add_png"
+        android:layout_gravity="right|bottom" />
+
+</android.support.design.widget.CoordinatorLayout>

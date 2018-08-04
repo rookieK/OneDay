@@ -3,6 +3,7 @@
     package="com.example.kwq.oneday">
 
     <application
+        android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SetPlan"></activity>
+        <activity android:name=".SelectDateActivity" />
+        <activity android:name=".LookPlanActivity" />
+        <activity android:name=".NewPlanActivity"></activity>
     </application>
 
 </manifest>
