@@ -13,16 +13,6 @@ public class Plan extends DataSupport {
 
     public Plan() {}
 
-    public Plan(String date, String startTime, String endTime, String planType, String plan) {
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.planType = planType;
-        this.plan = plan;
-    }
-
-
-
     public int getId() {
         return id;
     }

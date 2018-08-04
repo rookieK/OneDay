@@ -16,6 +16,7 @@ import com.example.kwq.oneday.db.PlanAdapter;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -54,7 +55,9 @@ public class LookPlanActivity extends AppCompatActivity {
         }
     }
     private void initPlan() {
-       planList = DataSupport.where("date = ?", "2018-8-4").order("rank").find(Plan.class);
+        Calendar calendar = Calendar.getInstance();
+        String dateString = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH)+1) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
+        planList = DataSupport.where("date = ?", dateString).order("rank").find(Plan.class);
     }
 
 }

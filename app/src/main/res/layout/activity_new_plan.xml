@@ -9,13 +9,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="7dp">
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/np_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat.Light" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginLeft="7dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -34,13 +42,15 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center_vertical"
-            android:text="S ? E ?"
+            android:layout_marginLeft="7dp"
+            android:text="开始时间 ? 结束时间 ?"
             android:textSize="25dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center_vertical"
+            android:layout_marginLeft="7dp"
             android:text="内容："
             android:textSize="25dp" />
 
@@ -49,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"
+            android:layout_marginLeft="7dp"
             android:hint="请输入计划内容"
             android:textSize="24dp"
             android:background="@null" />

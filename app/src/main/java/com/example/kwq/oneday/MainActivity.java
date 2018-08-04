@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.example.kwq.oneday.db.Plan;
 import com.example.kwq.oneday.db.PlanAdapter;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -116,14 +118,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initPlan() {
-        String sTime = "11:00";
-        String eTime = "11:30";
-        String planType = "工作";
-        String plan = "酒店客房就开始的房价快速反击肯定是九分";
-        for (int i = 0; i < 10; i++){
-            Plan p = new Plan("0", sTime, eTime, planType, plan);
-            planList.add(p);
-        }
+        Calendar calendar = Calendar.getInstance();
+        String dateString = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH)+1) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
+        planList = DataSupport.where("date = ?", dateString).order("rank").find(Plan.class);
     }
 
 }

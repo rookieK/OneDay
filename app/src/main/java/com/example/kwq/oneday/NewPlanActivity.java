@@ -1,29 +1,38 @@
 package com.example.kwq.oneday;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+
 import com.example.kwq.oneday.db.Plan;
 
 import org.litepal.LitePal;
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 
 public class NewPlanActivity extends AppCompatActivity {
 
     private EditText npPlanType;
     private EditText npPlan;
+    private Toolbar toolbar;
     private TextView npTime;
     private String startTime;
     private String endTime;
     private String hour;
     private String minute;
+    private String date;
+    private int id;
     private int rank;
     private int rank1;
 
@@ -31,6 +40,15 @@ public class NewPlanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_plan);
+
+        //取出SelectDate活动传来的date
+        Intent intent = getIntent();
+        date = intent.getStringExtra("date");
+        id = intent.getIntExtra("id", 0);
+
+        //将data显示在toolbar上
+        toolbar = findViewById(R.id.np_toolbar);
+        toolbar.setTitle("OneDay " + " " + date);
 
         npPlanType = findViewById(R.id.np_planType);
         npPlan = findViewById(R.id.np_plan);
@@ -41,6 +59,20 @@ public class NewPlanActivity extends AppCompatActivity {
         FloatingActionButton setEndTime = findViewById(R.id.np_setEndTime);
         FloatingActionButton newPlan = findViewById(R.id.np_newPlan);
 
+        //修改计划的情况
+        if(id != -1) {
+            String idString = String.valueOf(id);
+            List<Plan> plans = DataSupport.where("id = ?", idString).find(Plan.class);
+            for (Plan plan: plans) {
+                npTime.setText("开始时间:" + plan.getStartTime() + " " + "结束时间:" + plan.getEndTime());
+                startTime = plan.getStartTime();
+                endTime = plan.getEndTime();
+                npPlanType.setText(plan.getPlanType());
+                npPlan.setText(plan.getPlan());
+                rank = 1;
+                rank1 = 2;
+            }
+        }
 
         setStratTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +109,7 @@ public class NewPlanActivity extends AppCompatActivity {
                             minute = String.valueOf(i1);
                         }
                         endTime = hour + ":" + minute;
-                        npTime.setText("S:" + startTime + " " + "E:" + endTime);
+                        npTime.setText("开始时间:" + startTime + " " + "结束时间:" + endTime);
                     }
                 }, 0, 0, true).show();
             }
@@ -86,31 +118,66 @@ public class NewPlanActivity extends AppCompatActivity {
         newPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (startTime == null || endTime == null) {
-                    Toast.makeText(NewPlanActivity.this, "创建计划失败！开始时间或结束时间不能为空", Toast.LENGTH_SHORT).show();
-                }
-                else if (rank >= rank1) {
-                    Toast.makeText(NewPlanActivity.this, "创建计划失败！开始时间不能小于等于结束时间", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    String planType = npPlanType.getText().toString();
-                    String planContent = npPlan.getText().toString();
-                    if (planType.equals("")|| planContent.equals(""))
-                    {
-                        Toast.makeText(NewPlanActivity.this, "创建计划失败！计划类型或计划内容不能为空", Toast.LENGTH_SHORT).show();
+                //新增计划的情况
+                if (id == -1) {
+                    //时间不能为空
+                    if (startTime == null || endTime == null) {
+                        Toast.makeText(NewPlanActivity.this, "创建计划失败！开始时间或结束时间不能为空", Toast.LENGTH_SHORT).show();
+                    }
+                    //开始时间不能大于结束时间
+                    else if (rank >= rank1) {
+                        Toast.makeText(NewPlanActivity.this, "创建计划失败！开始时间不能在结束时间后", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        LitePal.getDatabase();
-                        Plan plan = new Plan();
-                        plan.setRank(rank);
-                        plan.setDate("2018-8-4");
-                        plan.setStartTime(startTime);
-                        plan.setEndTime(endTime);
-                        plan.setPlanType(planType);
-                        plan.setPlan(planContent);
-                        plan.save();
-                        Toast.makeText(NewPlanActivity.this, "创建计划成功！", Toast.LENGTH_SHORT).show();
-                        finish();
+                        String planType = npPlanType.getText().toString();
+                        String planContent = npPlan.getText().toString();
+                        //计划类型和计划内容不能为空
+                        if (planType.equals("") || planContent.equals("")) {
+                            Toast.makeText(NewPlanActivity.this, "创建计划失败！计划类型或计划内容不能为空", Toast.LENGTH_SHORT).show();
+                        } else {
+                            LitePal.getDatabase();
+                            Plan plan = new Plan();
+                            plan.setRank(rank);
+                            plan.setDate(date);
+                            plan.setStartTime(startTime);
+                            plan.setEndTime(endTime);
+                            plan.setPlanType(planType);
+                            plan.setPlan(planContent);
+                            plan.save();
+                            Toast.makeText(NewPlanActivity.this, "创建计划成功！", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+                }
+                //修改计划的情况
+                else {
+                    //时间不能为空
+                    if (startTime == null || endTime == null) {
+                        Toast.makeText(NewPlanActivity.this, "修改计划失败！开始时间或结束时间不能为空", Toast.LENGTH_SHORT).show();
+                    }
+                    //开始时间不能大于结束时间
+                    else if (rank >= rank1) {
+                        Toast.makeText(NewPlanActivity.this, "修改计划失败！开始时间不能在结束时间后", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        String planType = npPlanType.getText().toString();
+                        String planContent = npPlan.getText().toString();
+                        //计划类型和计划内容不能为空
+                        if (planType.equals("") || planContent.equals("")) {
+                            Toast.makeText(NewPlanActivity.this, "修改计划失败！计划类型或计划内容不能为空", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Plan plan = new Plan();
+                            plan.setRank(rank);
+                            plan.setDate(date);
+                            plan.setStartTime(startTime);
+                            plan.setEndTime(endTime);
+                            plan.setPlanType(planType);
+                            plan.setPlan(planContent);
+                            String idString = String.valueOf(id);
+                            plan.updateAll("id = ?", idString);
+                            Toast.makeText(NewPlanActivity.this, "修改计划成功！", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
                     }
                 }
             }

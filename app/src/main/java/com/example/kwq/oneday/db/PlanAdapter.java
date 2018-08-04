@@ -29,10 +29,10 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         public ViewHolder(View view) {
             super(view);
             planView = view;
-            startTime = (TextView) view.findViewById(R.id.startTime);
-            endTime = (TextView) view.findViewById(R.id.endTime);
-            planType = (TextView) view.findViewById(R.id.planType);
-            plan = (TextView) view.findViewById(R.id.plan);
+            startTime = view.findViewById(R.id.startTime);
+            endTime = view.findViewById(R.id.endTime);
+            planType = view.findViewById(R.id.planType);
+            plan = view.findViewById(R.id.plan);
         }
     }
 
@@ -53,6 +53,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
                 int position = holder.getAdapterPosition();
                 Plan plan = mPlanList.get(position);
                 Intent intent = new Intent(mContext, NewPlanActivity.class);
+                intent.putExtra("date", plan.getDate());
                 intent.putExtra("id", plan.getId());
                 mContext.startActivity(intent);
             }
