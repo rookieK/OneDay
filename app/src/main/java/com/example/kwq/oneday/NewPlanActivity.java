@@ -64,7 +64,8 @@ public class NewPlanActivity extends AppCompatActivity {
             String idString = String.valueOf(id);
             List<Plan> plans = DataSupport.where("id = ?", idString).find(Plan.class);
             for (Plan plan: plans) {
-                npTime.setText("开始时间:" + plan.getStartTime() + " " + "结束时间:" + plan.getEndTime());
+                String t1 = "开始时间:" + plan.getStartTime() + " " + "结束时间:" + plan.getEndTime();
+                npTime.setText(t1);
                 startTime = plan.getStartTime();
                 endTime = plan.getEndTime();
                 npPlanType.setText(plan.getPlanType());
@@ -109,7 +110,8 @@ public class NewPlanActivity extends AppCompatActivity {
                             minute = String.valueOf(i1);
                         }
                         endTime = hour + ":" + minute;
-                        npTime.setText("开始时间:" + startTime + " " + "结束时间:" + endTime);
+                        String t2 = "开始时间:" + startTime + " " + "结束时间:" + endTime;
+                        npTime.setText(t2);
                     }
                 }, 0, 0, true).show();
             }

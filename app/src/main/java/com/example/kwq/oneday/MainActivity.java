@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,6 +26,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private List<Plan> planList = new ArrayList<>();
+    private RecyclerView recyclerView;
     private TextView time;
     private TextView date;
 
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else {
-            RecyclerView recyclerView = findViewById(R.id.allPlan);
+            recyclerView = findViewById(R.id.allPlan);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(layoutManager);
             PlanAdapter adapter = new PlanAdapter(planList);
@@ -116,10 +116,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initPlan();
+        PlanAdapter adapter = new PlanAdapter(planList);
+        recyclerView.setAdapter(adapter);
+    }
 
     private void initPlan() {
         Calendar calendar = Calendar.getInstance();
-        String dateString = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH)+1) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
+        String dateString = calendar.get(Calendar.YEAR) + "-" + ((calendar.get(Calendar.MONTH)+1)<10? "0" + (calendar.get(Calendar.MONTH)+1) : (calendar.get(Calendar.MONTH)+1)) + "-" + (calendar.get(Calendar.DAY_OF_MONTH)<10? "0" + calendar.get(Calendar.DAY_OF_MONTH):calendar.get(Calendar.DAY_OF_MONTH));
         planList = DataSupport.where("date = ?", dateString).order("rank").find(Plan.class);
     }
 

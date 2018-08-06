@@ -34,8 +34,8 @@ public class SelectDateActivity extends AppCompatActivity {
         sdButton = findViewById(R.id.sd_Button);
 
         //获取当前日期显示在Button上
-        Calendar calender = Calendar.getInstance();
-        date = calender.get(Calendar.YEAR) + "-" + ((calender.get(Calendar.MONTH)+1)<10? "0" + (calender.get(Calendar.MONTH)+1) : (calender.get(Calendar.MONTH)+1)) + "-" + (calender.get(Calendar.DAY_OF_MONTH)<10? "0" + calender.get(Calendar.DAY_OF_MONTH):calender.get(Calendar.DAY_OF_MONTH));
+        Calendar calendar = Calendar.getInstance();
+        date = calendar.get(Calendar.YEAR) + "-" + ((calendar.get(Calendar.MONTH)+1)<10? "0" + (calendar.get(Calendar.MONTH)+1) : (calendar.get(Calendar.MONTH)+1)) + "-" + (calendar.get(Calendar.DAY_OF_MONTH)<10? "0" + calendar.get(Calendar.DAY_OF_MONTH):calendar.get(Calendar.DAY_OF_MONTH));
         sdButton.setText("查看/编辑" + date + "的计划");
         chooseCalender();
 
@@ -46,6 +46,7 @@ public class SelectDateActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectDateActivity.this, LookPlanActivity.class);
                 intent.putExtra("date", date);
                 startActivity(intent);
+                finish();
             }
         });
     }

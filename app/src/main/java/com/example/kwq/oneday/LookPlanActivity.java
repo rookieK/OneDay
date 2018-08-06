@@ -1,7 +1,7 @@
 package com.example.kwq.oneday;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +16,6 @@ import com.example.kwq.oneday.db.PlanAdapter;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -24,6 +23,7 @@ public class LookPlanActivity extends AppCompatActivity {
 
     private String date;
     private Toolbar toolbar;
+    private RecyclerView recyclerView;
     private List<Plan> planList = new ArrayList<>();
 
     @Override
@@ -39,6 +39,18 @@ public class LookPlanActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.lp_toolbar);
         toolbar.setTitle("OneDay " + " " + date);
 
+        FloatingActionButton newPlan = findViewById(R.id.lp_newPlan);
+
+        newPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LookPlanActivity.this, NewPlanActivity.class);
+                intent.putExtra("date", date);
+                intent.putExtra("id", -1);
+                startActivity(intent);
+            }
+        });
+
         //初始化Plan表
         initPlan();
         if (planList.size() == 0) {
@@ -47,17 +59,24 @@ public class LookPlanActivity extends AppCompatActivity {
         }
 
         else {
-            RecyclerView recyclerView = findViewById(R.id.lp_allPlan);
+            recyclerView = findViewById(R.id.lp_allPlan);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(layoutManager);
             PlanAdapter adapter = new PlanAdapter(planList);
             recyclerView.setAdapter(adapter);
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initPlan();
+        PlanAdapter adapter = new PlanAdapter(planList);
+        recyclerView.setAdapter(adapter);
+    }
+
     private void initPlan() {
-        Calendar calendar = Calendar.getInstance();
-        String dateString = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH)+1) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
-        planList = DataSupport.where("date = ?", dateString).order("rank").find(Plan.class);
+        planList = DataSupport.where("date = ?", date).order("rank").find(Plan.class);
     }
 
 }

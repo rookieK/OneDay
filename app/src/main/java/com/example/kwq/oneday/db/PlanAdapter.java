@@ -1,7 +1,10 @@
 package com.example.kwq.oneday.db;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +13,9 @@ import android.widget.TextView;
 
 import com.example.kwq.oneday.NewPlanActivity;
 import com.example.kwq.oneday.R;
+import com.example.kwq.oneday.util.Util;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
@@ -56,6 +62,31 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
                 intent.putExtra("date", plan.getDate());
                 intent.putExtra("id", plan.getId());
                 mContext.startActivity(intent);
+            }
+        });
+
+        holder.planView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("提示")
+                        .setMessage("是否删除该计划")
+                        .setPositiveButton("删除", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                int position = holder.getAdapterPosition();
+                                Plan plan = mPlanList.get(position);
+                                String idString = String.valueOf(plan.getId());
+                                DataSupport.deleteAll(Plan.class, "id = ?", idString);
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).show();
+                return true;
             }
         });
         return holder;
